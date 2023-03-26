@@ -1,5 +1,4 @@
 import sqlite3
-
 class DataBase:
     def __init__(self, file_path='./db/sagency_referals.db'):
         self.connection = sqlite3.connect(file_path, timeout=7)
