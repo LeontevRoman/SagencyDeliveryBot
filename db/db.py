@@ -55,7 +55,7 @@ class DataBase:
                                 (new_amount_invite_friends, referer_id))
             self.cursor.execute("""DELETE FROM bonus WHERE user_id = ?""", (user_id,))
             self.connection.commit()
-            return new_amount_invite_friends, referer_id
+            return new_amount_invite_friends, int(referer_id)
         else:
             self.cursor.execute("""DELETE FROM bonus WHERE user_id = ?""", (user_id,))
             self.connection.commit()
