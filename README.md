@@ -1,5 +1,5 @@
 # SagencyDeliveryBot - telegram-bot
-Реферальный Телеграмм-бот для чата @sagencydelivery
+Реферальный Телеграм-бот для чата @sagencydelivery
 
 stack:
 - python 3.10.8
