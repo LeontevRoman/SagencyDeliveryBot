@@ -8,6 +8,7 @@ from handlers import setup_routers
 
 async def run_bot():
     logging.basicConfig(level=logging.INFO)
+
     bot = Bot(token=TOKEN, parse_mode="HTML")
     dp = Dispatcher()
 
