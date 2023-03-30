@@ -6,3 +6,5 @@ stack:
 - aiogram 3.0.0b6
 - sqlite
 - asyncio 3.4.3
+<h2></h2>
+thanks for help guide - https://mastergroosha.github.io/aiogram-3-guide/
