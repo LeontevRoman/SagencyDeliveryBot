@@ -27,12 +27,9 @@ async def handler_new_member(event: types.ChatMemberUpdated, bot: Bot):
                                        f'По твоей ссылке вступил твой друг {event.from_user.first_name}.\n'
                                        f'У тебя максимальная скидка - 20%!')
         else:
-            referer_id = ''
-
-        db.create_user(
-            user_id = event.from_user.id,
-            user_name = event.from_user.first_name,
-            referer_id=referer_id)
+            db.create_user(
+                user_id = event.from_user.id,
+                user_name = event.from_user.first_name)
     except:
         await except_event(bot)
 
