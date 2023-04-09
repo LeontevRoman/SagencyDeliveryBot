@@ -16,4 +16,4 @@ APP_PORT = 443
 
 db = DataBase()
 
-GROUP_NAME = "@test_test_a"
+GROUP_NAME = "@sagencydelivery"
