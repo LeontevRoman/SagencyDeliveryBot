@@ -58,4 +58,4 @@ class DataBase:
         else:
             self.cursor.execute("""DELETE FROM bonus WHERE user_id = ?""", (user_id,))
             self.connection.commit()
-            return 0, 0
+            return -1, 0
