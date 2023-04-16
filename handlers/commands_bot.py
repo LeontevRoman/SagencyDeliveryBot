@@ -17,14 +17,17 @@ router.message.filter(
 @router.message(Command('start'), BotChatFilter())
 async def command_start(message: types.Message, bot=Bot):
     try:
-        db.create_user(user_id=message.from_user.id, user_name=message.from_user.first_name)
+        db.create_user(user_id=message.from_user.id,
+                       user_name=message.from_user.first_name,
+                       referer_id='',
+                       invite_link='')
         await message.answer(f'Привет {message.from_user.first_name} 🌱\n{await get_command_start()}',
                                reply_markup=keyboard_bot)
     except:
         await except_filter(message, bot)
 
 
-@router.message(Command('catalog'), BotChatFilter())
+@router.message(Command('catalog'))
 async def command_catalog(message: types.Message, bot=Bot):
     try:
         await message.answer(await get_command_catalog(), reply_markup=keyboard_bot)
@@ -32,7 +35,7 @@ async def command_catalog(message: types.Message, bot=Bot):
         await except_filter(message, bot)
 
 
-@router.message(Command('contacts'), BotChatFilter())
+@router.message(Command('contacts'))
 async def command_contacts(message: types.Message, bot=Bot):
     try:
         await message.answer(await get_command_contacts(), reply_markup=keyboard_bot)
@@ -40,7 +43,7 @@ async def command_contacts(message: types.Message, bot=Bot):
         await except_filter(message, bot)
 
 
-@router.message(Command('address'), BotChatFilter())
+@router.message(Command('address'))
 async def command_address(message: types.Message, bot=Bot):
     try:
         await message.answer(await get_command_address(), reply_markup=keyboard_bot)
