@@ -53,7 +53,7 @@ async def show_sales(message: types.Message, bot=Bot):
                                  f"Неплохо, но это не максимум. Приглашай большей друзей и увеличивай скидку!",
                                  reply_markup=keyboard_bot)
         else:
-            await message.answer(f"У тебя максиммальная скидка - 20%❗",
+            await message.answer(f"У тебя максимальная скидка - 20%❗",
                                  reply_markup=keyboard_bot)
         pass
     except:
