@@ -11,6 +11,7 @@ router = Router()
 async def handler_new_member(event: types.ChatMemberUpdated, bot: Bot):
     try:
         if event.invite_link:
+            invite_link = event.invite_link
             referer_id = int(event.invite_link.name) # get id referer from name invite link as int
 
             new_amount_invite_friends = db.update_percent_sale(referer_id) # add 1 point referer and return new value
@@ -27,9 +28,15 @@ async def handler_new_member(event: types.ChatMemberUpdated, bot: Bot):
                                        f'По твоей ссылке вступил твой друг {event.from_user.first_name}.\n'
                                        f'У тебя максимальная скидка - 20%!')
         else:
-            db.create_user(
-                user_id = event.from_user.id,
-                user_name = event.from_user.first_name)
+            referer_id = ''
+            invite_link = ''
+
+        db.create_user(
+            user_id = event.from_user.id,
+            user_name = event.from_user.first_name,
+            referer_id = referer_id,
+            invite_link = invite_link
+        )
     except:
         await except_event(bot)
 
