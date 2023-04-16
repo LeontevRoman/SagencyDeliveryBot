@@ -27,7 +27,7 @@ async def command_start(message: types.Message, bot=Bot):
         await except_filter(message, bot)
 
 
-@router.message(Command('catalog'))
+@router.message(Command('catalog'), BotChatFilter())
 async def command_catalog(message: types.Message, bot=Bot):
     try:
         await message.answer(await get_command_catalog(), reply_markup=keyboard_bot)
@@ -35,7 +35,7 @@ async def command_catalog(message: types.Message, bot=Bot):
         await except_filter(message, bot)
 
 
-@router.message(Command('contacts'))
+@router.message(Command('contacts'), BotChatFilter())
 async def command_contacts(message: types.Message, bot=Bot):
     try:
         await message.answer(await get_command_contacts(), reply_markup=keyboard_bot)
@@ -43,7 +43,7 @@ async def command_contacts(message: types.Message, bot=Bot):
         await except_filter(message, bot)
 
 
-@router.message(Command('address'))
+@router.message(Command('address'), BotChatFilter())
 async def command_address(message: types.Message, bot=Bot):
     try:
         await message.answer(await get_command_address(), reply_markup=keyboard_bot)
