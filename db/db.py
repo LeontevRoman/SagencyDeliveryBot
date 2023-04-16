@@ -5,7 +5,7 @@ class DataBase:
         self.cursor = self.connection.cursor()
 
 
-    def create_user(self, user_id, user_name, referer_id='', invite_link=''):
+    def create_user(self, user_id, user_name, referer_id, invite_link):
         check_user = self.cursor.execute("""SELECT user_id FROM bonus WHERE user_id = ?""",
                                               (user_id,)).fetchone()
         if check_user:
