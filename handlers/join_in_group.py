@@ -1,9 +1,9 @@
 from aiogram import Router, Bot, F, types
 from aiogram.filters import ChatMemberUpdatedFilter, JOIN_TRANSITION
 
-
 from config import db, GROUP_NAME
 from filters.except_filters import except_event
+from answer_message.message import delete_user_not_referer_id
 
 router = Router()
 
@@ -11,10 +11,9 @@ router = Router()
 async def handler_new_member(event: types.ChatMemberUpdated, bot: Bot):
     try:
         if event.invite_link:
-            invite_link = event.invite_link
-            referer_id = int(event.invite_link.name) # get id referer from name invite link as int
+            referer_id = event.invite_link.name # get id referer from name invite link as int
 
-            new_amount_invite_friends = db.update_percent_sale(referer_id) # add 1 point referer and return new value
+            new_amount_invite_friends = db.update_percent_sale(int(referer_id)) # add 1 point referer and return new value
             if new_amount_invite_friends < 20:
                 await bot.send_message(event.invite_link.name,
                                        f'По твоей ссылке вступил твой друг {event.from_user.first_name}. Тебе добавлен 1% скидки!\n'
@@ -29,13 +28,12 @@ async def handler_new_member(event: types.ChatMemberUpdated, bot: Bot):
                                        f'У тебя максимальная скидка - 20%!')
         else:
             referer_id = ''
-            invite_link = ''
 
         db.create_user(
             user_id = event.from_user.id,
             user_name = event.from_user.first_name,
             referer_id = referer_id,
-            invite_link = invite_link
+            invite_link = ''
         )
     except:
         await except_event(bot)
@@ -46,7 +44,7 @@ async def handler_left_member(event: types.ChatMemberUpdated, bot: Bot):
     try:
         new_amount_invite_friends, referer_id = db.down_percent_sale(event.from_user.id)
 
-        if new_amount_invite_friends:
+        if new_amount_invite_friends >= 0:
             if new_amount_invite_friends < 20:
                 await bot.send_message(referer_id,
                                        f'Твой друг {event.from_user.first_name}, которого ты приглашал(а), покинул группу {GROUP_NAME}.\n'
@@ -56,7 +54,7 @@ async def handler_left_member(event: types.ChatMemberUpdated, bot: Bot):
                                        f'Твой друг {event.from_user.first_name}, которого ты приглашал(а), покинул группу {GROUP_NAME}.\n'
                                        f'У тебя все еще максимальная скидка 20%!')
         else:
-            pass
+            await delete_user_not_referer_id(bot)
     except:
         await except_event(bot)
 
