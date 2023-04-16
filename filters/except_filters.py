@@ -4,4 +4,5 @@ async def except_filter(message, bot):
     await bot.send_message(chat_id=782219228, text='Бот сломался нахрен - надо разобраться!')
 
 async def except_event(bot):
-    await bot.send_message(chat_id=782219228, text='Удалился пользователь которого нет в БД')
+    await bot.send_message(chat_id=782219228, text='Удалился пользователь которого не было в БД')
+
