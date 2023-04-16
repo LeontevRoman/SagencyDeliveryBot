@@ -35,3 +35,6 @@ async def user_not_in_group(message, bot):
                                 f"Вступи в группу 👉🏻 {GROUP_NAME}\n"
                                 f"Затем пеши мне /start",
                             reply_markup=keyboard_view)
+
+async def delete_user_not_referer_id(bot):
+    await bot.send_message(chat_id=782219228, text='Удалился пользователь у которого не было реферала')
