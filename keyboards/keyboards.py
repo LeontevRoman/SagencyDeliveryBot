@@ -8,3 +8,5 @@ keyboard_bot = ReplyKeyboardMarkup(
 keyboard_start = ReplyKeyboardMarkup(
     keyboard=[[KB(text="/start")]],
     resize_keyboard=True)
+
+keyboard_group = not KB
