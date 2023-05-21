@@ -1,7 +1,7 @@
 from aiogram.types import ReplyKeyboardMarkup
 
 from config import GROUP_NAME
-from keyboards.keyboards import keyboard_start
+from keyboards.keyboards import keyboard_start, keyboard_group
 
 
 async def get_command_start():
@@ -25,16 +25,13 @@ async def get_command_address():
 async def get_error():
     return f'⛔ Сообщения, фото и т.п. я не принимаю! Выбери команду из Меню или задай свой вопрос в группе: {GROUP_NAME}'
 
-async def get_chat_error():
-    return '⛔ Команды в общей группе запрещены. Но их принимает наш бот - @SagencyDeliveryBot. Отправляй команды ему!'
+async def get_chat_start_error():
+    return '⛔ Команда start в общей группе не работает. Отправляй ее нашему боту - @SagencyDeliveryBot '
 
-async def user_not_in_group(message, bot):
-    keyboard_view = ReplyKeyboardMarkup(keyboard=keyboard_start, resize_keyboard=True)
-    await bot.send_message(chat_id=message.chat.id,
-                           text=f"⛔ Чтобы начать взаимодействовать со мной:\n"
-                                f"Вступи в группу 👉🏻 {GROUP_NAME}\n"
-                                f"Затем пеши мне /start",
-                            reply_markup=keyboard_view)
+async def user_not_in_group():
+     return f'⛔ Чтобы начать взаимодействовать со мной:\n' \
+            f'Вступи в группу 👉🏻 {GROUP_NAME}\n' \
+            f'Затем пеши мне /start'
 
-async def delete_user_not_referer_id(bot):
-    await bot.send_message(chat_id=782219228, text='Удалился пользователь у которого не было реферала')
+async def delete_user_not_referer_id():
+    return 'Удалился пользователь у которого не было реферала'

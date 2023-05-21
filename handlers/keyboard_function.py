@@ -2,14 +2,16 @@ from aiogram import types, Router, Bot
 from aiogram.filters import Text
 
 from config import db, GROUP_NAME
-from filters.user_group_filter import UserInGroupFilter
+from filters.bot_chat_filter import BotChatFilter
+from filters.user_group_filter import UserInGroupFilterKeyboard
 from filters.except_filters import except_filter
 
 from keyboards.keyboards import keyboard_bot
 
 router = Router()
 router.message.filter(
-    UserInGroupFilter()
+    BotChatFilter(),
+    UserInGroupFilterKeyboard()
 )
 
 @router.message(Text(contains=['Пригласить друга🔝'], ignore_case=True))

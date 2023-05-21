@@ -3,9 +3,9 @@ from aiogram import types
 from aiogram.filters import BaseFilter
 
 
-class BotChatFilter(BaseFilter):
+class GroupChatFilter(BaseFilter):
     async def __call__(self, message: types.Message):
-        if message.chat.id == message.from_user.id:
+        if message.chat.username == 'sagencydelivery':
             return True
         else:
             return False

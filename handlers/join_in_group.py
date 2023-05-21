@@ -4,6 +4,7 @@ from aiogram.filters import ChatMemberUpdatedFilter, JOIN_TRANSITION
 from config import db, GROUP_NAME
 from filters.except_filters import except_event
 from answer_message.message import delete_user_not_referer_id
+from keyboards.keyboards import keyboard_start, keyboard_group
 
 router = Router()
 
@@ -38,7 +39,6 @@ async def handler_new_member(event: types.ChatMemberUpdated, bot: Bot):
     except:
         await except_event(bot)
 
-
 @router.chat_member(ChatMemberUpdatedFilter(~JOIN_TRANSITION))
 async def handler_left_member(event: types.ChatMemberUpdated, bot: Bot):
     try:
@@ -54,7 +54,7 @@ async def handler_left_member(event: types.ChatMemberUpdated, bot: Bot):
                                        f'Твой друг {event.from_user.first_name}, которого ты приглашал(а), покинул группу {GROUP_NAME}.\n'
                                        f'У тебя все еще максимальная скидка 20%!')
         else:
-            await delete_user_not_referer_id(bot)
+            await bot.send_message(chat_id=782219228, text=await delete_user_not_referer_id(), reply_markup=keyboard_group)
     except:
         await except_event(bot)
 
